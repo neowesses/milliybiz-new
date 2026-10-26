@@ -1,0 +1,15 @@
+# секреты: пароль CRM, токен бота
+data/config.json
+# содержимое сайта и заявки (имена/телефоны людей) — живут только на сервере
+data/db.json
+data/robot.json
+data/*.tmp
+# загруженные фото
+public/uploads/
+# коммерческие шрифты — лицензия не разрешает выкладывать файлы в открытый доступ
+public/assets/fonts/*.ttf
+public/assets/fonts/*.otf
+public/assets/fonts/*.woff
+public/assets/fonts/*.woff2
+node_modules/
+_test.bat

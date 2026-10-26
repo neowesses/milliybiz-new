@@ -1,0 +1,12 @@
+/* Фирменные шрифты из макета Figma */
+@font-face { font-family: "BaseBloom"; src: url("../fonts/BaseBloom.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+
+@font-face { font-family: "Gotham Pro"; src: url("../fonts/GothamPro.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Gotham Pro"; src: url("../fonts/GothamPro-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Gotham Pro"; src: url("../fonts/GothamPro-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "Neometric"; src: url("../fonts/Neometric-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Neometric"; src: url("../fonts/Neometric-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Neometric"; src: url("../fonts/Neometric-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Neometric"; src: url("../fonts/Neometric-ExtraBold.ttf") format("truetype"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Neometric"; src: url("../fonts/Neometric-HeavyItalic.ttf") format("truetype"); font-weight: 900; font-style: italic; font-display: swap; }
