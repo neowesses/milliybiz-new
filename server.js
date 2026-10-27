@@ -203,7 +203,7 @@ http.createServer(async (req, res) => {
     process.exit(1);
   }
   throw e;
-}).listen(PORT, () => {
+}).listen(PORT, process.env.HOST || '0.0.0.0', () => {
   console.log(`\n  MILLIYBIZ is running\n  Site: http://localhost:${PORT}/\n  CRM:  http://localhost:${PORT}/admin/\n`);
   if (process.env.ROBOT !== 'off') robot.start();
 });
