@@ -521,3 +521,9 @@ html[data-theme="dark"] .src-row { border-color: rgba(255,255,255,.12); backgrou
 .slot--feed:hover .slot__s { display: none; }
 .slot--feed:hover .slot__hint { display: block; }
 html[data-theme="dark"] .slot__hint { color: var(--accent); }
+
+/* список «Узбекистан / Спорт» в строках источников: ровные отступы, стрелка не налезает на текст */
+.src-row { grid-template-columns: 84px minmax(0, 1fr) 168px auto auto 40px; }
+.src-row .xs { width: 100%; }
+.src-row .xs__v { min-height: 38px; padding: 2px 38px 0 16px; font-size: 14px; }
+.src-row .xs__btn::after { right: 16px; }
