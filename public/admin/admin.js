@@ -318,7 +318,7 @@
         <div class="board board--home">
           <div class="zone zone--ads z-ads"><a class="slot" href="#/ads" style="text-decoration:none"><span class="slot__n">ADS БЛОК</span><span class="slot__t">${esc((ad.title?.ru || '').replace(/\n/g, ' ')) || 'Баннер'}</span><span class="slot__s">${ad.active === false ? 'Выключен' : 'Реклама · настроить'}</span></a></div>
           <div class="zone z-main">${slot('main', 0, r.main[0], '1 БЛОК')}</div>
-          <div class="zone z-feed">${r.feed.map((p, i) => `<div class="slot slot--static"><span class="slot__n">${i + 1} БЛОК</span><span class="slot__t">${esc(ttl(p))}</span><span class="slot__s">Лента · авто</span></div>`).join('')}</div>
+          <div class="zone z-feed">${r.feed.map((p, i) => `<a class="slot slot--feed" href="#/post/${encodeURIComponent(p.id)}" title="Лента собирается сама из свежих новостей. Нажмите, чтобы открыть эту новость"><span class="slot__n">${i + 1} БЛОК</span><span class="slot__t">${esc(ttl(p))}</span><span class="slot__s">Лента · авто</span><span class="slot__hint">Открыть новость →</span></a>`).join('')}</div>
           <div class="zone z-side">${r.side.map((s, i) => slot('side', i, s, `${i + 1} БЛОК`)).join('')}</div>
           <div class="zone z-grid">${r.grid.map((s, i) => slot('grid', i, s, `${i + 1} БЛОК`)).join('')}</div>
         </div>`;

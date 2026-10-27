@@ -514,3 +514,10 @@ html[data-theme="dark"] .src-msg.is-ok { color: #6fd394; } html[data-theme="dark
 html[data-theme="dark"] .src-sw span { background: #444; }
 html[data-theme="dark"] .src-row { border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
 @media (max-width: 900px) { .src-row { grid-template-columns: 70px minmax(0, 1fr) auto; } .src-row .xs, .src-row > select { grid-column: 2; } .src-add { flex-direction: column; } }
+
+/* блоки ленты: та же подсветка при наведении; по клику — открыть новость */
+.slot--feed { text-decoration: none; color: inherit; }
+.slot__hint { display: none; font-size: 11px; color: var(--red); text-transform: uppercase; letter-spacing: .05em; }
+.slot--feed:hover .slot__s { display: none; }
+.slot--feed:hover .slot__hint { display: block; }
+html[data-theme="dark"] .slot__hint { color: var(--accent); }
