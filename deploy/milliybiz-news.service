@@ -12,6 +12,8 @@ WorkingDirectory=/srv/projects/milliybiz-news/app
 Environment=NODE_ENV=production
 Environment=PORT=4200
 Environment=HOST=127.0.0.1
+# IPv6 on this VPS does not route: always try IPv4 first (Telegram API, news sources)
+Environment=NODE_OPTIONS=--dns-result-order=ipv4first
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=3
