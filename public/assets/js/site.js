@@ -9,7 +9,7 @@
       adSpot: 'Reklama uchun joy', adLabel: 'Reklama', news: 'MILLIYBIZ.NEWS', sport: 'SPORT / BUSINESS',
       all: 'Barchasi', allNews: 'Barcha yangiliklar', more: 'Yana yuklash', nothing: 'Hech narsa topilmadi',
       found: 'Qidiruv natijalari', related: 'Mavzuga oid', share: 'Ulashish', views: "ko'rishlar",
-      notFound: 'Maqola topilmadi', back: 'Bosh sahifaga', source: 'Manba', day: 'Kunduzgi rejim', night: 'Tungi rejim',
+      notFound: 'Maqola topilmadi', back: 'Bosh sahifaga', nfTitle: 'Sahifa topilmadi', nfText: 'Bu sahifa o‘chirilgan yoki manzilda xato bor. Bosh sahifaga qayting yoki kerakli yangilikni qidiruv orqali toping.', nfFresh: 'So‘nggi yangiliklar', source: 'Manba', day: 'Kunduzgi rejim', night: 'Tungi rejim',
       name: 'Ism Familiya*', phone: 'Telefon raqam*', send: 'Ariza qoldirish', sending: 'Yuborilmoqda…',
       ok: "Rahmat! Arizangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.", err: "Xatolik. Qayta urinib ko'ring.",
       fill: "Iltimos, maydonlarni to'g'ri to'ldiring", rights: 'BARCHA HUQUQLAR HIMOYALANGAN.', allVideos: 'Barcha videolar',
@@ -20,7 +20,7 @@
       adSpot: 'Место для рекламы', adLabel: 'Реклама', news: 'MILLIYBIZ.NEWS', sport: 'SPORT / BUSINESS',
       all: 'Все', allNews: 'Все новости', more: 'Показать ещё', nothing: 'Ничего не найдено',
       found: 'Результаты поиска', related: 'Читайте также', share: 'Поделиться', views: 'просмотров',
-      notFound: 'Статья не найдена', back: 'На главную', source: 'Источник', day: 'Дневной режим', night: 'Ночной режим',
+      notFound: 'Статья не найдена', back: 'На главную', nfTitle: 'Страница не найдена', nfText: 'Возможно, её удалили или в адресе опечатка. Вернитесь на главную или найдите нужную новость через поиск.', nfFresh: 'Свежие новости', source: 'Источник', day: 'Дневной режим', night: 'Ночной режим',
       name: 'Имя Фамилия*', phone: 'Номер телефона*', send: 'Оставить заявку', sending: 'Отправляем…',
       ok: 'Спасибо! Заявка принята. Мы скоро свяжемся с вами.', err: 'Ошибка. Попробуйте ещё раз.',
       fill: 'Пожалуйста, заполните поля корректно', rights: 'ВСЕ ПРАВА ЗАЩИЩЕНЫ.', allVideos: 'Все видео',
@@ -288,6 +288,25 @@
 
   // ---------- страницы ----------
   const pages = {
+    // 404: страницы нет (или статьи) — поиск, кнопки и свежие новости, чтобы читатель не ушёл
+    notfound(d, title) {
+      document.title = `404 — Milliybiz`;
+      const fresh = (d.posts || []).slice(0, 3);
+      $('#app').innerHTML = `
+        <section class="nf"><div class="container">
+          <div class="nf__box reveal">
+            <div class="nf__code" aria-hidden="true">4<span>${LOGO}</span>4</div>
+            <h1 class="nf__t">${esc(title || T('nfTitle'))}</h1>
+            <p class="nf__p">${T('nfText')}</p>
+            <form class="nf__search" action="/news.html" role="search">
+              <label class="search__in">${SEARCH}<input name="q" placeholder="${T('search')}" aria-label="${T('search')}"></label>
+              <button type="submit">${T('search')}</button>
+            </form>
+            <div class="nf__acts"><a class="nf__btn" href="/">${T('back')}</a><a class="nf__btn nf__btn--ghost" href="/news.html">${T('allNews')}</a></div>
+          </div>
+          ${fresh.length ? `<h2 class="sec-title nf__sec">${T('nfFresh')}</h2><div class="nf__grid">${fresh.map(gridCard).join('')}</div>` : ''}
+        </div></section>`;
+    },
     async home(d) {
       const lay = resolveLayout(d);
       const ad = d.ads?.top;
@@ -322,10 +341,7 @@
     async article(d) {
       const id = qs('id');
       let p = d.byId[id];
-      if (!p) {
-        $('#app').innerHTML = `<div class="container"><div class="page-head"><h1>${T('notFound')}</h1></div><a class="btn-more" style="display:inline-block;margin:0 0 60px" href="/">${T('back')}</a></div>`;
-        return;
-      }
+      if (!p) return pages.notfound(d, T('notFound'));
       document.title = `${L(p.title)} — Milliybiz`;
       setMeta('description', L(p.lead));
       setMeta('og:title', L(p.title), true); setMeta('og:image', p.image, true);

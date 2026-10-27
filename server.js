@@ -192,6 +192,8 @@ http.createServer(async (req, res) => {
   const p = new URL(req.url, 'http://x').pathname;
   try {
     if (p.startsWith('/api/')) { syncDb(); await api(req, res, p, req.method); }
+    // короткий адрес CRM: /crm → /admin/
+    else if (/^\/crm(\/.*)?$/i.test(p)) { res.writeHead(301, { Location: '/admin/' }); res.end(); }
     else serveStatic(req, res, p);
   } catch (e) {
     console.error(req.method, p, e.message);
